@@ -16,5 +16,85 @@
   "subscription_list_title_prefix": {
     "singular": "European Structural and Investment Fund",
     "plural": "European Structural and Investment Funds"
-  }
+  },
+  "email_signup_choice": [
+    {
+      "key": "access-to-employment",
+      "radio_button_name": "Access to employment",
+      "topic_name": "access to employment",
+      "prechecked": false
+    },
+    {
+      "key": "business-support",
+      "radio_button_name": "Business support",
+      "topic_name": "business support",
+      "prechecked": false
+    },
+    {
+      "key": "climate-change",
+      "radio_button_name": "Climate change",
+      "topic_name": "climate change",
+      "prechecked": false
+    },
+    {
+      "key": "environment",
+      "radio_button_name": "Environment",
+      "topic_name": "environment",
+      "prechecked": false
+    },
+      {
+      "key": "IT-and-broadband",
+      "radio_button_name": "IT and broadband",
+      "topic_name": "IT and broadband",
+      "prechecked": false
+    },
+    {
+      "key": "learning-and-skills",
+      "radio_button_name": "Learning and skills",
+      "topic_name": "learning and skills",
+      "prechecked": false
+    },
+    {
+      "key": "low-carbon",
+      "radio_button_name": "Low carbon",
+      "topic_name": "low carbon",
+      "prechecked": false
+    },
+      {
+      "key": "renewable-energy",
+      "radio_button_name": "Renewable energy",
+      "topic_name": "renewable energy",
+      "prechecked": false
+    },
+    {
+      "key": "research-and-innovation",
+      "radio_button_name": "Research and innovation",
+      "topic_name": "research and innovation",
+      "prechecked": false
+    },
+    {
+      "key": "social-inclusion",
+      "radio_button_name": "Social inclusion",
+      "topic_name": "social inclusion",
+      "prechecked": false
+    },
+    {
+      "key": "transport",
+      "radio_button_name": "Transport",
+      "topic_name": "transport",
+      "prechecked": false
+    },
+        {
+      "key": "technical-assistance",
+      "radio_button_name": "Technical assistance",
+      "topic_name": "technical assistance",
+      "prechecked": false
+    },
+    {
+      "key": "tourism",
+      "radio_button_name": "Tourism",
+      "topic_name": "tourism",
+      "prechecked": false
+    }
+  ]
 }
