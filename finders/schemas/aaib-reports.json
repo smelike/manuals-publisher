@@ -6,7 +6,7 @@
       "name": "Aircraft category",
       "type": "text",
       "preposition": "in aircraft category",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         {"label": "Commercial - fixed wing", "value": "commercial-fixed-wing"},
@@ -17,11 +17,18 @@
       ]
     },
     {
+      "key": "aircraft_category_name",
+      "name": "Aircraft category name",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
       "key": "report_type",
       "name": "Report type",
       "type": "text",
       "preposition": "of type",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         {"label": "Annual safety report", "value": "annual-safety-report"},
@@ -32,6 +39,14 @@
         {"label": "Formal report", "value": "formal-report"},
         {"label": "Special bulletin", "value": "special-bulletin"}
       ]
+    },
+    {
+      "key": "report_type_name",
+      "name": "Report type name",
+      "type": "text",
+      "preposition": "of type",
+      "display_as_result_metadata": true,
+      "filterable": false
     },
     {
       "key": "date_of_occurrence",
