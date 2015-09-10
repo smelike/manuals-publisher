@@ -6,13 +6,8 @@ namespace :rummager do
 
     require "multi_json"
 
-    metadatas = Dir.glob("finders/metadata/**/*.json").map do |file_path|
-      {
-        file: MultiJson.load(File.read(file_path)),
-        timestamp: File.mtime(file_path)
-      }
-    end
+    finder_loader = PublishingApiFinderLoader.new('finders')
 
-    RummagerFinderPublisher.new(metadatas).call
+    RummagerFinderPublisher.new(finder_loader.finders).call
   end
 end
