@@ -34,7 +34,7 @@ private
   end
 
   def metadata_files
-    @matadata_files ||= Dir.glob(File.join(folder, "metadata/*.json")).map do|file|
+    @metadata_files ||= Dir.glob(File.join(folder, "metadata/*.json")).map do|file|
       File.basename(file)
     end
   end
