@@ -10,16 +10,16 @@ class PublishingApiFinderPublisher
 
   def call
     finders.map do |finder|
-      if finder[:metadata].has_key?("content_id") && !preview_only?(finder)
+      if finder.has_content_id? && !finder.preview_only?
         publish(finder)
-      elsif preview_only?(finder)
+      elsif finder.preview_only?
         if preview_domain_or_not_production?
           publish(finder)
         else
-          puts "didn't publish #{finder[:metadata]["name"]} because it is preview_only" if @log
+          puts "didn't publish #{finder.metadata["name"]} because it is preview_only" if @log
         end
       else
-        puts "didn't publish #{finder[:metadata]["name"]} because it doesn't have a content_id" if @log
+        puts "didn't publish #{finder.metadata["name"]} because it doesn't have a content_id" if @log
       end
     end
   end
@@ -29,11 +29,7 @@ private
 
   def publish(finder)
     export_finder(finder)
-    export_signup(finder) if finder[:metadata].has_key?("signup_content_id")
-  end
-
-  def preview_only?(finder)
-    finder[:metadata]["preview_only"] == true
+    export_signup(finder) if finder.metadata.has_key?("signup_content_id")
   end
 
   def preview_domain_or_not_production?
@@ -42,9 +38,9 @@ private
 
   def export_finder(finder)
     finder = FinderContentItemPresenter.new(
-      finder[:metadata],
-      finder[:schema],
-      finder[:timestamp],
+      finder.metadata,
+      finder.schema,
+      finder.timestamp,
     )
 
     attrs = finder.exportable_attributes
@@ -56,8 +52,8 @@ private
 
   def export_signup(finder)
     finder_signup = FinderSignupContentItemPresenter.new(
-      finder[:metadata],
-      finder[:timestamp],
+      finder.metadata,
+      finder.timestamp,
     )
 
     attrs = finder_signup.exportable_attributes

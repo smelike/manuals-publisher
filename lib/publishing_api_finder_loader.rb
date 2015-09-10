@@ -10,11 +10,11 @@ class PublishingApiFinderLoader
       metadata_file = File.join(folder, "metadata", filename)
       schema_file = File.join(folder, "schemas", filename)
 
-      {
+      Finder.new(
         metadata: MultiJson.load(File.read(metadata_file)),
         schema: MultiJson.load(File.read(schema_file)),
         timestamp: File.mtime(metadata_file)
-      }
+      )
     end
   end
 
