@@ -1,47 +1,15 @@
+require "abstract_finder_publisher"
 require "gds_api/publishing_api"
 require_relative "../app/presenters/finder_content_item_presenter"
 require_relative "../app/presenters/finder_signup_content_item_presenter"
 
-class PublishingApiFinderPublisher
-  def initialize(finders, log = true)
-    @finders = finders
-    @log = log
-  end
-
-  def call
-    finders.each do |finder|
-      publish_if_should(finder)
-    end
-  end
+class PublishingApiFinderPublisher < AbstractFinderPublisher
 
 private
-  attr_reader :finders
-
-  def publish_if_should(finder)
-    if finder[:metadata].has_key?("content_id") && !preview_only?(finder)
-      publish(finder)
-    elsif preview_only?(finder)
-      if preview_domain_or_not_production?
-        publish(finder)
-      else
-        puts "didn't publish #{finder[:metadata]["name"]} because it is preview_only" if @log
-      end
-    else
-      puts "didn't publish #{finder[:metadata]["name"]} because it doesn't have a content_id" if @log
-    end
-  end
 
   def publish(finder)
     export_finder(finder)
     export_signup(finder) if finder[:metadata].has_key?("signup_content_id")
-  end
-
-  def preview_only?(finder)
-    finder[:metadata]["preview_only"] == true
-  end
-
-  def preview_domain_or_not_production?
-    ENV.fetch("GOVUK_APP_DOMAIN", "")[/preview/] || !Rails.env.production?
   end
 
   def export_finder(finder)
