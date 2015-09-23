@@ -9,14 +9,10 @@ class RummagerFinderPublisher
 
   def call
     metadatas.each do |metadata|
-      if !preview_only?(metadata)
+      if should_publish_in_this_environment?(metadata)
         export_finder(metadata)
-      elsif preview_only?(metadata)
-        if preview_domain_or_not_production?
-          export_finder(metadata)
-        else
-          logger.info("didn't publish #{metadata[:file]["name"]} because it is preview_only")
-        end
+      else
+        logger.info("didn't publish #{metadata[:file]["name"]} because it is preview_only")
       end
     end
   end
@@ -25,11 +21,15 @@ private
 
   attr_reader :metadatas, :logger
 
+  def should_publish_in_this_environment?(metadata)
+    in_preview? || !preview_only?(metadata)
+  end
+
   def preview_only?(metadata)
     metadata[:file]["preview_only"] == true
   end
 
-  def preview_domain_or_not_production?
+  def in_preview?
     ENV.fetch("GOVUK_APP_DOMAIN", "")[/preview/] || !Rails.env.production?
   end
 

@@ -10,14 +10,10 @@ class PublishingApiFinderPublisher
 
   def call
     finders.map do |finder|
-      if !preview_only?(finder)
+      if should_publish?(finder)
         publish(finder)
-      elsif preview_only?(finder)
-        if preview_domain_or_not_production?
-          publish(finder)
-        else
-          logger.info("didn't publish #{finder[:metadata]["name"]} because it is preview_only")
-        end
+      else
+        logger.info("didn't publish #{finder[:metadata]["name"]} because it is preview_only")
       end
     end
   end
@@ -25,17 +21,26 @@ class PublishingApiFinderPublisher
 private
   attr_reader :finders, :logger
 
+  def should_publish?(finder)
+    # Are we in preview or is the thing not preview_only?
+    # This will publish all Finders in Preview (or Dev)
+    # and only publish 'live' Finders in Production like
+    # environments
+    publish_in_production?(finder) || !in_production_like_environment?
+  end
+
   def publish(finder)
     export_finder(finder)
     export_signup(finder) if finder[:metadata].has_key?("signup_content_id")
   end
 
-  def preview_only?(finder)
-    finder[:metadata]["preview_only"] == true
+  def publish_in_production?(finder)
+    finder[:metadata].fetch("publish_in_production", false)
   end
 
-  def preview_domain_or_not_production?
-    ENV.fetch("GOVUK_APP_DOMAIN", "")[/preview/] || !Rails.env.production?
+  def in_production_like_environment?
+    # All finders should be published in dev, test and non-production-like environments
+    Rails.env.production? && ENV["PRODUCTION_LIKE_ENVIRONMENT"]
   end
 
   def export_finder(finder)
