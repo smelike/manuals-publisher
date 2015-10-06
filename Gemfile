@@ -25,33 +25,30 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-end
-
-
 gem 'unicorn', '~> 4.9.0'
 gem 'logstasher', '0.6.2'
-group :development, :test do
-  gem 'rspec-rails', '~> 3.3'
-end
-
-group :development, :test do
-  gem 'simplecov', '0.10.0', require: false
-  gem 'simplecov-rcov', '0.2.3', require: false
-end
-
-gem 'airbrake', '~> 4.2.1'
 
 group :development do
+  gem 'meta_request'
   gem 'better_errors'
   gem 'binding_of_caller'
 end
 
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.3'
+  gem 'simplecov', '0.10.0', require: false
+  gem 'simplecov-rcov', '0.2.3', require: false
+  gem 'database_cleaner', '1.5.0'
+  gem 'pry-byebug'
+  gem 'web-console', '~> 2.0'
+  gem "capybara", "2.5.0"
+  gem 'capybara-webkit', '1.7.1'
+  gem 'factory_girl'
+end
+
+
+gem 'airbrake', '~> 4.2.1'
 gem 'gds-sso', '11.0.0'
 gem 'govuk_admin_template', '1.0.0'
 gem 'plek', '~> 1.10'
@@ -69,3 +66,4 @@ else
 end
 
 gem "foreman", "0.74.0"
+gem "select2-rails",  "4.0.0"
