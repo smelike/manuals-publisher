@@ -43,10 +43,13 @@ group :development, :test do
   gem 'simplecov-rcov', '0.2.3', require: false
 end
 
-gem 'plek', '~> 1.10'
 gem 'airbrake', '~> 4.2.1'
 
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
 end
+
+gem 'gds-sso', '11.0.0'
+gem 'govuk_admin_template', '1.0.0'
+gem 'plek', '~> 1.10'
