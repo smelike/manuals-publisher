@@ -53,3 +53,15 @@ end
 gem 'gds-sso', '11.0.0'
 gem 'govuk_admin_template', '1.0.0'
 gem 'plek', '~> 1.10'
+
+if ENV["GOVSPEAK_DEV"]
+  gem "govspeak", :path => "../govspeak"
+else
+  gem "govspeak", "3.4.0"
+end
+
+if ENV["API_DEV"]
+  gem "gds-api-adapters", :path => "../gds-api-adapters"
+else
+  gem "gds-api-adapters", "24.4.0"
+end
