@@ -45,3 +45,8 @@ end
 
 gem 'plek', '~> 1.10'
 gem 'airbrake', '~> 4.2.1'
+
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
