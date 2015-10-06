@@ -65,3 +65,5 @@ if ENV["API_DEV"]
 else
   gem "gds-api-adapters", "24.4.0"
 end
+
+gem "foreman", "0.74.0"
