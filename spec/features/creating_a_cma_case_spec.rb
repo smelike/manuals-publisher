@@ -16,7 +16,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
       "publishing_app" => "specialist-publisher",
       "rendering_app" => "specialist-frontend",
       "locale" => "en",
-      "phase" => "live",
+      "phase" => "live"
       "public_updated_at" => "2015-11-23T14:07:47.240Z",
       "details" => {
         "body" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
