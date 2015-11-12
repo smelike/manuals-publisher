@@ -63,7 +63,6 @@ RSpec.feature "Creating a CMA case", type: :feature do
     click_button "Save as draft"
 
     assert_publishing_api_put_item("4a656f42-35ad-4034-8c7a-08870db7fffe", request_json_including(cma_case_content_item))
-
     expect(page.status_code).to eq(200)
   end
 end
