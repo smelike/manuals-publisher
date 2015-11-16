@@ -33,6 +33,15 @@ class DocumentPresenter
     }
   end
 
+  def links_attributes
+    {
+      content_id: document.content_id,
+      links: {
+        organisations: document.organisations
+      },
+    }
+  end
+
 private
 
   attr_reader :document
