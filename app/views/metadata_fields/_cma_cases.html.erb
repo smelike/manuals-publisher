@@ -3,7 +3,7 @@
 <%= f.label :closed_date %>
 <%= f.text_field :closed_date, placeholder: '2013-10-19', class: 'form-control' %>
 <%= f.label :case_type %>
-<%= f.select :case_type, f.object.facet_options(:case_type), {}, { class: 'form-control' } %>
+<%= f.select :case_type, facet_options(f, :case_type), {}, { class: 'form-control' } %>
 <%= f.label :case_state %>
 <%= f.select :case_state, facet_options(f, :case_state), {}, { class: 'form-control' } %>
 <%= f.label :market_sector %>
