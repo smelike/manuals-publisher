@@ -17,6 +17,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
       "rendering_app" => "specialist-frontend",
       "locale" => "en",
       "phase" => "live",
+      "public_updated_at" => "2015-11-23T14:07:47.240Z",
       "details" => {
         "body" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
         "metadata" => {
@@ -47,8 +48,18 @@ RSpec.feature "Creating a CMA case", type: :feature do
     log_in_as_editor(:cma_editor)
 
     allow(SecureRandom).to receive(:uuid).and_return("4a656f42-35ad-4034-8c7a-08870db7fffe")
+    allow(Time.zone).to receive(:now).and_return("2015-11-23T14:07:47.240Z")
 
     stub_default_publishing_api_put
+
+    fields = [
+      :base_path,
+      :content_id,
+      :title,
+      :public_updated_at,
+    ]
+
+    publishing_api_has_fields_for_format('cma_case', [cma_case_content_item], fields)
   end
 
   scenario "Create a new CMA case" do
