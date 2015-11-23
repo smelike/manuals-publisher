@@ -47,11 +47,7 @@ private
   attr_reader :document
 
   def metadata
-    document.format_specific_fields.map do |f|
-      {
-        f => document.send(f)
-      }
-    end.reduce({}, :merge).merge(document_type: document.format)
+    document.format_specific_metadata.merge(document_type: document.format)
   end
 
 end
