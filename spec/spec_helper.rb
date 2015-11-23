@@ -48,7 +48,7 @@ RSpec.configure do |config|
   end
 
   config.include Capybara::DSL, type: :feature
-  config.include(Capybara::Webkit::RspecMatchers, :type => :feature)
+  config.include(Capybara::RSpecMatchers, :type => :feature)
   config.include(GdsApi::TestHelpers::PublishingApiV2)
 
   config.after(:each) do

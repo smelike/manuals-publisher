@@ -3,11 +3,24 @@ require 'gds_api/publishing_api_v2'
 class DocumentsController <  ApplicationController
 
   def index
-    redirect_to "/#{document_types.keys.first}" unless params[:document_type]
+    unless params[:document_type]
+      redirect_to "/#{document_types.keys.first}"
+      return
+    end
+
+    @documents = publishing_api.get_content_items(
+      content_format: current_format.format_name,
+      fields: [
+        :base_path,
+        :content_id,
+        :title,
+        :public_updated_at,
+      ]
+    ).to_ostruct
   end
 
   def new
-    render :new, locals: { document: current_format.klass.new }
+    @document = current_format.klass.new
   end
 
   def create
@@ -29,6 +42,18 @@ class DocumentsController <  ApplicationController
       flash[:error] = errors.join(', ')
       render :new, locals: { document: current_format.klass.new }
     end
+  end
+
+  def show
+    @document = current_format.klass.from_publishing_api(publishing_api.get_content(params[:id]).to_ostruct)
+  end
+
+  def edit
+    @document = current_format.klass.from_publishing_api(publishing_api.get_content(params[:id]).to_ostruct)
+  end
+
+  def update
+
   end
 
 private

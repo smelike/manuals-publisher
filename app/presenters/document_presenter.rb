@@ -17,6 +17,7 @@ class DocumentPresenter
       rendering_app: "specialist-frontend",
       locale: "en",
       phase: document.phase,
+      public_updated_at: document.public_updated_at,
       details: {
         body: document.body,
         metadata: metadata,
@@ -46,11 +47,7 @@ private
   attr_reader :document
 
   def metadata
-    document.format_specific_fields.map do |f|
-      {
-        :"#{f}" => document.send(f)
-      }
-    end.reduce({}, :merge).merge(document_type: document.format)
+    document.format_specific_metadata.merge(document_type: document.format)
   end
 
 end
