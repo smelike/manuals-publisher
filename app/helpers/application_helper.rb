@@ -15,4 +15,7 @@ module ApplicationHelper
     end
   end
 
+  def published_document_path(document)
+    Plek.current.find("website-root") + document.base_path
+  end
 end
