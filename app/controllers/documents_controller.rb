@@ -20,7 +20,7 @@ class DocumentsController <  ApplicationController
   end
 
   def new
-    render :new, locals: { document: current_format.klass.new }
+    @document = current_format.klass.new
   end
 
   def create
