@@ -1,9 +1,11 @@
 class Document
   include ActiveModel::Model
 
-  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state
+  attr_accessor :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state
+  attr_reader :content_id
 
   def initialize(params = {}, format_specific_fields = [])
+    @content_id = params.fetch(:content_id, SecureRandom.uuid)
     @title = params.fetch(:title, nil)
     @summary = params.fetch(:summary, nil)
     @body = params.fetch(:body, nil)
@@ -16,10 +18,6 @@ class Document
 
   def base_path
     "#{public_path}/#{title.parameterize}"
-  end
-
-  def content_id
-    @content_id || SecureRandom.uuid
   end
 
   def format
@@ -65,8 +63,9 @@ class Document
   def self.from_publishing_api(payload)
     document = self.new(
       {
+        content_id: payload.content_id,
         title: payload.title,
-        summary: payload.details.summary,
+        summary: payload.details.description,
         body: payload.details.body,
       }
     )

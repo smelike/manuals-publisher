@@ -47,15 +47,6 @@ RSpec.feature "Creating a CMA case", type: :feature do
   before do
     log_in_as_editor(:cma_editor)
 
-    allow(SecureRandom).to receive(:uuid).and_return("4a656f42-35ad-4034-8c7a-08870db7fffe")
-    allow(Time.zone).to receive(:now).and_return("2015-11-23T14:07:47.240Z")
-
-    stub_default_publishing_api_put
-  end
-
-  scenario "Create a new CMA case" do
-    visit "/cma-cases/new"
-
     fields = [
       :base_path,
       :content_id,
@@ -63,7 +54,13 @@ RSpec.feature "Creating a CMA case", type: :feature do
       :public_updated_at,
     ]
 
+    stub_default_publishing_api_put
+
     publishing_api_has_fields_for_format('cma_case', [cma_case_content_item], fields)
+  end
+
+  scenario "Create a new CMA case" do
+    visit "/cma-cases/new"
 
     fill_in "Title", with: "Example CMA Case"
     fill_in "Summary", with: "This is the summary of an example CMA case"

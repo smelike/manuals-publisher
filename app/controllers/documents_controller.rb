@@ -45,7 +45,32 @@ class DocumentsController <  ApplicationController
   end
 
   def show
-    @document = current_format.klass.from_publishing_api(publishing_api.get_content(params[:id]).to_ostruct)
+    @document = current_format.klass.from_publishing_api(publishing_api.get_content(params[:content_id]).to_ostruct)
+  end
+
+  def edit
+    @document = current_format.klass.from_publishing_api(publishing_api.get_content(params[:content_id]).to_ostruct)
+  end
+
+  def update
+    document = current_format.klass.new(
+      filtered_params(params[:"#{current_format.format_name}"])
+    )
+
+    presented_document = DocumentPresenter.new(document)
+
+    request = publishing_api.put_content(document.content_id, presented_document.to_json)
+
+    if request.code == 200
+      flash[:success] = "Updated #{document.title}"
+      redirect_to documents_path(document_type: current_format.document_type)
+    else
+      errors = request.body.error.fields.map { |k, v|
+        "#{k}: #{v}"
+      }
+      flash[:error] = errors.join(', ')
+      render :edit, locals: { document: document }
+    end
   end
 
 private
