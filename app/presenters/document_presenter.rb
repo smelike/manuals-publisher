@@ -21,6 +21,7 @@ class DocumentPresenter
       details: {
         body: document.body,
         metadata: metadata,
+        change_history: document.change_notes,
       },
       routes: [
         {
@@ -29,7 +30,7 @@ class DocumentPresenter
         }
       ],
       redirects: [],
-      update_type: "major",
+      update_type: document.update_type,
     }
   end
 

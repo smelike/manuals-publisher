@@ -16,6 +16,7 @@ gem 'plek', '~> 1.10'
 gem 'gds-sso', '11.0.0'
 gem 'govuk_admin_template', '~> 3.4.0'
 gem "govuk_frontend_toolkit", "0.44.0"
+gem "govuk-content-schema-test-helpers", "1.4.0"
 
 if ENV["GOVSPEAK_DEV"]
   gem "govspeak", :path => "../govspeak"

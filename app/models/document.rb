@@ -2,11 +2,13 @@ class Document
   include ActiveModel::Model
   include ActiveModel::Validations
 
-  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :minor_update, :change_note
+  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :update_type, :change_note, :change_history
 
   validates :title, presence: true
   validates :summary, presence: true
   validates :body, presence: true, safe_html: true
+  validates :change_note, presence: true, if: :major_update?
+  validates :update_type, presence: true
 
   COMMON_FIELDS = [
     :title,
@@ -49,8 +51,12 @@ class Document
     publication_state == "draft"
   end
 
-  def users
-    content_item.users || []
+  def change_notes
+    (change_history + [change_note]).compact
+  end
+
+  def major_update?
+    update_type == "major"
   end
 
   def facet_options(facet)
@@ -90,6 +96,7 @@ class Document
     )
 
     document.base_path = payload.base_path
+    document.change_history = payload.details.change_history
 
     document.format_specific_fields.each do |field|
       document.public_send(:"#{field.to_s}=", payload.details.metadata.send(field))
