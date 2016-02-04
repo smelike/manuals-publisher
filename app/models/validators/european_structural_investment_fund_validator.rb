@@ -2,7 +2,7 @@ require "delegate"
 require "validators/date_validator"
 require "validators/safe_html_validator"
 
-class EsiFundValidator < SimpleDelegator
+class EuropeanStructuralInvestmentFundValidator < SimpleDelegator
   include ActiveModel::Validations
 
   validates :title, presence: true

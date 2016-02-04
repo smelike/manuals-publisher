@@ -116,7 +116,7 @@ require "csg_helpers"
 require "dsu_helpers"
 require "employment_appeal_tribunal_decision_helpers"
 require "employment_tribunal_decision_helpers"
-require "esi_fund_helpers"
+require "european_structural_investment_fund_helpers"
 require "idf_helpers"
 require "maib_report_helpers"
 require "msa_helpers"
@@ -145,7 +145,7 @@ World(CsgHelpers)
 World(DsuHelpers)
 World(EmploymentAppealTribunalDecisionHelpers)
 World(EmploymentTribunalDecisionHelpers)
-World(EsiFundHelpers)
+World(EuropeanStructuralInvestmentFundHelpers)
 World(IdfHelpers)
 World(MaibReportHelpers)
 World(MsaHelpers)

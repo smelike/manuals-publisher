@@ -54,8 +54,8 @@ class ApplicationController < ActionController::Base
         document_type: "employment_appeal_tribunal_decision",
         title: "EAT Decisions",
       },
-      "esi-funds" => {
-        document_type: "esi_fund",
+      "european-structural-investment-funds" => {
+        document_type: "european_structural_investment_fund",
         title: "ESI Funds",
       },
       "medical-safety-alerts" => {

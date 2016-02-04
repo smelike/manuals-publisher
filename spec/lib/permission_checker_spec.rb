@@ -58,7 +58,7 @@ describe PermissionChecker do
 
       context "publishing a non-manual format owned by their organisation" do
         it "allows publishing" do
-          expect(checker.can_publish?("esi_fund")).to be true
+          expect(checker.can_publish?("european_structural_investment_fund")).to be true
         end
       end
 
@@ -97,13 +97,13 @@ describe PermissionChecker do
 
     it "allows members of all owning organisations to edit" do
       checkers.each do |checker|
-        expect(checker.can_edit?("esi_fund")).to be true
+        expect(checker.can_edit?("european_structural_investment_fund")).to be true
       end
     end
 
     it "allows editors who are members of all owning organisations to publish" do
       checkers.each do |checker|
-        expect(checker.can_publish?("esi_fund")).to be true
+        expect(checker.can_publish?("european_structural_investment_fund")).to be true
       end
     end
   end

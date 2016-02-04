@@ -30,7 +30,7 @@ class PermissionChecker
         hm-courts-and-tribunals-service
         employment-tribunal
       )
-    when "esi_fund"
+    when "european_structural_investment_fund"
       %w(
         department-for-communities-and-local-government
         department-for-work-pensions

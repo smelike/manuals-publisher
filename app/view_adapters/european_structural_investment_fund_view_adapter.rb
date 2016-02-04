@@ -1,4 +1,4 @@
-class EsiFundViewAdapter < DocumentViewAdapter
+class EuropeanStructuralInvestmentFundViewAdapter < DocumentViewAdapter
   attributes = [
     :title,
     :summary,
@@ -17,13 +17,13 @@ class EsiFundViewAdapter < DocumentViewAdapter
   end
 
   def self.model_name
-    ActiveModel::Name.new(self, nil, "EsiFund")
+    ActiveModel::Name.new(self, nil, "EuropeanStructuralInvestmentFund")
   end
 
 private
 
   def finder_schema
-    SpecialistPublisherWiring.get(:esi_fund_finder_schema)
+    SpecialistPublisherWiring.get(:european_structural_investment_fund_finder_schema)
   end
 
 end

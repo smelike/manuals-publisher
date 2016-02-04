@@ -1,6 +1,6 @@
 require "document_metadata_decorator"
 
-class EsiFund < DocumentMetadataDecorator
+class EuropeanStructuralInvestmentFund < DocumentMetadataDecorator
   set_extra_field_names [
     :fund_state,
     :fund_type,

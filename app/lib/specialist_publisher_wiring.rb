@@ -89,9 +89,9 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
       get(:validatable_document_factories).drug_safety_update_factory)
   }
 
-  define_factory(:esi_fund_builder) {
-    SpecialistDocumentBuilder.new("esi_fund",
-      get(:validatable_document_factories).esi_fund_factory)
+  define_factory(:european_structural_investment_fund_builder) {
+    SpecialistDocumentBuilder.new("european_structural_investment_fund",
+      get(:validatable_document_factories).european_structural_investment_fund_factory)
   }
 
   define_factory(:maib_report_builder) {
@@ -250,8 +250,8 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
     FinderSchema.new(Rails.root.join("finders/schemas/drug-safety-updates.json"))
   }
 
-  define_singleton(:esi_fund_finder_schema) {
-    FinderSchema.new(Rails.root.join("finders/schemas/esi-funds.json"))
+  define_singleton(:european_structural_investment_fund_finder_schema) {
+    FinderSchema.new(Rails.root.join("finders/schemas/european-structural-investment-funds.json"))
   }
 
   define_singleton(:maib_report_finder_schema) {

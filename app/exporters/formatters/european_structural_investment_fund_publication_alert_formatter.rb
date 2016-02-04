@@ -1,6 +1,6 @@
 require "formatters/abstract_document_publication_alert_formatter"
 
-class EsiFundPublicationAlertFormatter < AbstractDocumentPublicationAlertFormatter
+class EuropeanStructuralInvestmentFundPublicationAlertFormatter < AbstractDocumentPublicationAlertFormatter
 
   def name
     "European Structural and Investment Funds"

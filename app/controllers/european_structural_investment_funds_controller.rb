@@ -1,0 +1,2 @@
+class EuropeanStructuralInvestmentFundsController < AbstractDocumentsController
+end

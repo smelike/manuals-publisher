@@ -1,7 +1,7 @@
 require "fast_spec_helper"
-require "formatters/esi_fund_publication_alert_formatter"
+require "formatters/european_structural_investment_fund_publication_alert_formatter"
 
-RSpec.describe EsiFundPublicationAlertFormatter do
+RSpec.describe EuropeanStructuralInvestmentFundPublicationAlertFormatter do
   let(:url_maker) {
     double(:url_maker,
       published_specialist_document_path: "http://www.example.com"
@@ -11,11 +11,11 @@ RSpec.describe EsiFundPublicationAlertFormatter do
     double(:document,
       title: "Some title",
       extra_fields: {},
-      document_type: "esi_fund",
+      document_type: "european_structural_investment_fund",
     )
   }
   subject(:formatter) {
-    EsiFundPublicationAlertFormatter.new(
+    EuropeanStructuralInvestmentFundPublicationAlertFormatter.new(
       document: document,
       url_maker: url_maker,
     )

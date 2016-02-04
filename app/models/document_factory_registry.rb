@@ -3,7 +3,7 @@ require "validators/change_note_validator"
 require "validators/cma_case_validator"
 require "validators/countryside_stewardship_grant_validator"
 require "validators/drug_safety_update_validator"
-require "validators/esi_fund_validator"
+require "validators/european_structural_investment_fund_validator"
 require "validators/international_development_fund_validator"
 require "validators/maib_report_validator"
 require "validators/manual_document_validator"
@@ -97,11 +97,11 @@ class DocumentFactoryRegistry
     }
   end
 
-  def esi_fund_factory
+  def european_structural_investment_fund_factory
     ->(*args) {
       ChangeNoteValidator.new(
-        EsiFundValidator.new(
-          EsiFund.new(
+        EuropeanStructuralInvestmentFundValidator.new(
+          EuropeanStructuralInvestmentFund.new(
             SpecialistDocument.new(
               SlugGenerator.new(prefix: "european-structural-investment-funds"),
               *args,

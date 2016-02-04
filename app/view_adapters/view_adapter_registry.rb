@@ -12,7 +12,7 @@ private
     "drug_safety_update" => DrugSafetyUpdateViewAdapter,
     "employment_appeal_tribunal_decision" => EmploymentAppealTribunalDecisionViewAdapter,
     "employment_tribunal_decision" => EmploymentTribunalDecisionViewAdapter,
-    "esi_fund" => EsiFundViewAdapter,
+    "european_structural_investment_fund" => EuropeanStructuralInvestmentFundViewAdapter,
     "international_development_fund" => InternationalDevelopmentFundViewAdapter,
     "maib_report" => MaibReportViewAdapter,
     "medical_safety_alert" => MedicalSafetyAlertViewAdapter,

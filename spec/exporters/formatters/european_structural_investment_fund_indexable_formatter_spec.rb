@@ -1,10 +1,10 @@
 require "spec_helper"
-require "formatters/esi_fund_indexable_formatter"
+require "formatters/european_structural_investment_fund_indexable_formatter"
 
-RSpec.describe EsiFundIndexableFormatter do
+RSpec.describe EuropeanStructuralInvestmentFundIndexableFormatter do
   let(:document) {
     double(
-    :esi_fund,
+    :european_structural_investment_fund,
     body: double,
     slug: double,
     summary: double,
@@ -19,7 +19,7 @@ RSpec.describe EsiFundIndexableFormatter do
     )
   }
 
-  subject(:formatter) { EsiFundIndexableFormatter.new(document) }
+  subject(:formatter) { EuropeanStructuralInvestmentFundIndexableFormatter.new(document) }
 
   it_should_behave_like "a specialist document indexable formatter"
 
