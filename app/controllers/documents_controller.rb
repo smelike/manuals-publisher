@@ -125,6 +125,8 @@ private
   end
 
   def permitted?
+    return true if current_user.gds_editor?
+
     if formats_user_can_access.fetch(document_type, nil)
       true
     else

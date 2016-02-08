@@ -19,6 +19,12 @@ RSpec.feature "Access control", type: :feature do
     publishing_api_has_fields_for_format('specialist_document', [], fields)
   end
 
+  context "as a GDS Editor" do
+    before do
+      log_in_as_editor(gds_editor)
+    end
+  end
+
   context "as a CMA Editor" do
     before do
       log_in_as_editor(:cma_editor)

@@ -13,6 +13,10 @@ FactoryGirl.define do
     permissions %w(signin editor)
   end
 
+  factory :gds_editor, parent :user do
+    permissions %w(signin gds_editor)
+  end
+
   factory :cma_editor, parent: :user do
     organisation_slug "competition-and-markets-authority"
     organisation_content_id "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
