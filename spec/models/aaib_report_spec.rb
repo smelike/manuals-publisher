@@ -13,6 +13,7 @@ describe AaibReport do
       "rendering_app" => "specialist-frontend",
       "locale" => "en",
       "phase" => "live",
+      "updated_at" => "2015-11-16T11:53:30",
       "public_updated_at" => "2015-11-16T11:53:30",
       "publication_state" => "draft",
       "details" => {
@@ -33,6 +34,44 @@ describe AaibReport do
       "update_type" => "major",
     }
   end
+
+  let(:published_aaib_report_content_item) {
+    {
+      "content_id" => SecureRandom.uuid,
+      "base_path" => "/aaib-reports/published-aaib-report",
+      "title" => "Published AAIB Report",
+      "description" => "This is the summary of a published AAIB Report",
+      "format" => "specialist_document",
+      "publishing_app" => "specialist-publisher",
+      "rendering_app" => "specialist-frontend",
+      "locale" => "en",
+      "phase" => "live",
+      "updated_at" => "2015-11-16T11:53:30",
+      "public_updated_at" => "2015-11-16T11:53:30",
+      "publication_state" => "live",
+      "details" => {
+        "body" => "## Header" + ("\r\n\r\nThis is the long body of a published AAIB Report" * 10),
+        "metadata" => {
+          "date_of_occurrence" => "2015-10-10",
+          "document_type" => "aaib_report"
+        },
+        "change_history" => [
+          {
+            "public_timestamp" => "2015-12-18T10:12:26+00:00",
+            "note" => "First published.",
+          }
+        ],
+      },
+      "routes" => [
+        {
+          "path" => "/aaib-reports/published-aaib-report",
+          "type" => "exact",
+        }
+      ],
+      "redirects" => [],
+      "update_type" => nil,
+    }
+  }
 
   let(:non_aaib_report_content_item) {
     {
@@ -138,14 +177,18 @@ describe AaibReport do
   end
 
   context "#save!" do
-    it "saves the AAIB Report" do
+    it "saves the AAIB Report with an update type of major" do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_put_links
 
       aaib_report = @aaib_reports[0]
 
       aaib_report.delete("publication_state")
-      aaib_report.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
+      aaib_report.merge!({
+        "updated_at" => "2015-12-18T10:12:26+00:00",
+        "public_updated_at" => "2015-12-18T10:12:26+00:00"
+      })
+
       aaib_report["details"].merge!(
         "change_history" => [
           {
@@ -159,6 +202,30 @@ describe AaibReport do
       expect(c.save!).to eq(true)
 
       assert_publishing_api_put_content(c.content_id, request_json_including(aaib_report))
+      expect(aaib_report.to_json).to be_valid_against_schema('specialist_document')
+    end
+
+    it "saves the AAIB Report with an update type of minor" do
+      publishing_api_has_item(published_aaib_report_content_item)
+      stub_any_publishing_api_put_content
+      stub_any_publishing_api_put_links
+
+      aaib_report = published_aaib_report_content_item
+
+      aaib_report.delete("publication_state")
+      aaib_report.merge!({
+        "updated_at" => "2015-12-20T10:12:26+00:00",
+        "public_updated_at" => "2015-11-16T11:53:30+00:00",
+        "update_type" => "minor",
+      })
+
+      Timecop.freeze(Time.parse("2015-12-20 10:12:26 UTC"))
+
+      a = described_class.find(aaib_report["content_id"])
+      a.update_type = 'minor'
+      expect(a.save!).to eq(true)
+
+      assert_publishing_api_put_content(a.content_id, request_json_including(aaib_report))
       expect(aaib_report.to_json).to be_valid_against_schema('specialist_document')
     end
   end

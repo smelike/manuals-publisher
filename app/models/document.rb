@@ -2,7 +2,7 @@ class Document
   include ActiveModel::Model
   include ActiveModel::Validations
 
-  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :change_note
+  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :updated_at, :state, :bulk_published, :publication_state, :change_note
   attr_writer :change_history, :update_type
 
   validates :title, presence: true
@@ -17,6 +17,7 @@ class Document
     :body,
     :publication_state,
     :public_updated_at,
+    :updated_at,
   ]
 
   def initialize(params = {}, format_specific_fields = [])
@@ -112,7 +113,8 @@ class Document
         summary: payload.description,
         body: payload.details.body,
         publication_state: payload.publication_state,
-        public_updated_at: payload.public_updated_at
+        public_updated_at: payload.public_updated_at,
+        updated_at: payload.updated_at
       }
     )
 
@@ -141,6 +143,14 @@ class Document
 
   def public_updated_at=(timestamp)
     @public_updated_at = Time.parse(timestamp.to_s) unless timestamp.nil?
+  end
+
+  def updated_at
+    @updated_at ||= Time.zone.now
+  end
+
+  def updated_at=(timestamp)
+    @updated_at = Time.parse(timestamp.to_s) unless timestamp.nil?
   end
 
   def self.all
@@ -176,11 +186,12 @@ class Document
 
   def save!
     if self.valid?
+      self.updated_at = Time.zone.now
       self.public_updated_at = Time.zone.now if self.update_type == 'major'
 
       presented_document = DocumentPresenter.new(self)
       presented_links = DocumentLinksPresenter.new(self)
-
+      
       begin
         item_request = publishing_api.put_content(self.content_id, presented_document.to_json)
         links_request = publishing_api.put_links(self.content_id, presented_links.to_json)

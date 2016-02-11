@@ -18,6 +18,7 @@ class DocumentPresenter
       locale: "en",
       phase: document.phase,
       public_updated_at: public_updated_at,
+      updated_at: updated_at,
       details: {
         body: document.body,
         metadata: metadata,
@@ -48,6 +49,10 @@ private
 
   def public_updated_at
     document.public_updated_at.to_datetime.rfc3339
+  end
+
+  def updated_at
+    document.updated_at.to_datetime.rfc3339
   end
 
   def change_history
