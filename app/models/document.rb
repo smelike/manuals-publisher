@@ -199,7 +199,6 @@ class Document
 
   def publish!
     indexable_document = SearchPresenter.new(self)
-
     begin
       update_type = self.update_type || 'major'
       publish_request = publishing_api.publish(content_id, update_type)

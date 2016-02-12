@@ -50,6 +50,7 @@ private
 
     data = {
       "AAIB Report" => AaibReport,
+      "Asylum Support Decision" => AsylumSupportDecision,
       "CMA Case" => CmaCase,
       "ESI Fund" => EsiFund,
       "MAIB Report" => MaibReport,
