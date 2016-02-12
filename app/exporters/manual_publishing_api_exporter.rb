@@ -83,7 +83,6 @@ private
   def links_data
     {
       organisations: [organisation.details.content_id],
-      sections: manual.documents.map(&:id),
     }
   end
 

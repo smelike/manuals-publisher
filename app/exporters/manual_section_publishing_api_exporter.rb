@@ -48,7 +48,6 @@ private
       locale: "en",
       links: {
         organisations: [organisation.details.content_id],
-        manual: [manual.id],
       },
     }
   end
