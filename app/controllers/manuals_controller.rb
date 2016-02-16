@@ -12,4 +12,8 @@ class ManualsController <  ApplicationController
     @manual = Manual.find(content_id: params[:content_id])
   end
 
+  def new
+    @manual = Manual.new
+  end
+
 end
