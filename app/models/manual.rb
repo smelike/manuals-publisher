@@ -18,6 +18,10 @@ class Manual
     self.public_updated_at = params.fetch(:public_updated_at, nil)
   end
 
+  def base_path
+    @base_path ||= "/guidance/#{title.parameterize}"
+  end
+
   %w{draft live redrafted}.each do |state|
     define_method("#{state}?") do
       publication_state == state
@@ -41,7 +45,7 @@ class Manual
   end
 
   def section_content_ids
-    @section_content_ids
+    @section_content_ids ||= []
   end
 
   def section_content_ids=(section_content_ids)
@@ -55,7 +59,7 @@ class Manual
   end
 
   def organisation_content_ids
-    @organisation_content_ids
+    @organisation_content_ids ||= []
   end
 
   def organisation_content_ids=(organisation_content_ids)
