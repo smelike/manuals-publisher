@@ -14,6 +14,7 @@ describe CmaCase do
       "locale" => "en",
       "phase" => "live",
       "public_updated_at" => "2015-11-16T11:53:30",
+      "updated_at" => "2015-11-16T11:53:30",
       "publication_state" => "draft",
       "details" => {
         "body" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
@@ -159,6 +160,7 @@ describe CmaCase do
 
       cma_case.delete("publication_state")
       cma_case.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
+      cma_case.merge!("updated_at" => "2015-12-18T10:12:26+00:00")
       cma_case["details"].merge!(
         "change_history" => [
           {

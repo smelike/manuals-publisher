@@ -18,6 +18,7 @@ class DocumentPresenter
       locale: "en",
       phase: document.phase,
       public_updated_at: public_updated_at,
+      updated_at: updated_at,
       details: {
         body: document.body,
         metadata: metadata,
@@ -47,6 +48,10 @@ private
       document_type: document.publishing_api_document_type,
       bulk_published: document.bulk_published,
     }).reject { |k, v| v.blank? }
+  end
+
+  def updated_at
+    document.updated_at.to_datetime.rfc3339
   end
 
   def public_updated_at

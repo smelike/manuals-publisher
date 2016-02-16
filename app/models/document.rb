@@ -2,7 +2,7 @@ class Document
   include ActiveModel::Model
   include ActiveModel::Validations
 
-  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :change_note
+  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :state, :bulk_published, :publication_state, :change_note
   attr_writer :change_history, :update_type
 
   validates :title, presence: true
@@ -111,7 +111,8 @@ class Document
         summary: payload.description,
         body: payload.details.body,
         publication_state: payload.publication_state,
-        public_updated_at: payload.public_updated_at
+        public_updated_at: payload.public_updated_at,
+        updated_at: payload.updated_at
       }
     )
 
@@ -134,6 +135,14 @@ class Document
     end
 
     document
+  end
+
+  def updated_at
+    @updated_at ||= Time.zone.now
+  end
+
+  def updated_at=(timestamp)
+    @updated_at = Time.parse(timestamp.to_s) unless timestamp.nil?
   end
 
   def public_updated_at
@@ -177,6 +186,7 @@ class Document
 
   def save!
     if self.valid?
+      self.updated_at = Time.zone.now
       self.public_updated_at = Time.zone.now if self.update_type == 'major'
 
       presented_document = DocumentPresenter.new(self)
