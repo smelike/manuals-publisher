@@ -149,6 +149,34 @@ class Manual
     manual
   end
 
+  def save!
+    if self.valid?
+      # TODO Change this behaviour when Sections can be edited.
+      self.public_updated_at = Time.zone.now
+
+      presented_manual = ManualPresenter.new(self)
+      presented_links = ManualLinksPresenter.new(self)
+
+      begin
+        item_request = publishing_api.put_content(self.content_id, presented_manual.to_json)
+        links_request = publishing_api.put_links(self.content_id, presented_links.to_json)
+
+        binding.pry
+
+        item_request.code == 200 && links_request.code == 200
+      rescue GdsApi::HTTPErrorResponse => e
+        Airbrake.notify(e)
+
+        false
+      end
+
+    else
+      raise RecordNotSaved
+    end
+  end
+
+  class RecordNotSaved < StandardError; end
+
   def publish_tasks
     # TODO Implment sidekiq
     []
