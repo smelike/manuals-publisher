@@ -1,4 +1,4 @@
-class UtaacDecision < document
+class UtaacDecision < Document
   validates :tribunal_decision_category, presence: true
   validates :tribunal_decision_decision_date, presence: true, date: true
   validates :tribunal_decision_judges, presence: true
@@ -20,5 +20,16 @@ class UtaacDecision < document
 
   def self.publishing_api_document_type
     "utaac_decision"
+  end
+
+  def category_prefix_for(category)
+    case category
+    when "section-95-support-for-asylum-seekers"
+      "section-95"
+    when "section-4-2-support-for-failed-asylum-seekers"
+      "section-4-2"
+    when "section-4-1-support-for-persons-who-are-neither-an-asylum-seeker-nor-a-failed-asylum-seeker"
+      "section-4-1"
+    end
   end
 end

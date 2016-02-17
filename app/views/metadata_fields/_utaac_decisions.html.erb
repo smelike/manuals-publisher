@@ -1,0 +1,20 @@
+<div class="form-group">
+  <%= f.label :tribunal_decision_category %>
+  <%= f.select :tribunal_decision_category, f.object.facet_options(:tribunal_decision_category), { label: "Category" }, { class: 'form-control' } %>
+</div>
+<div class="form-group">
+  <%= f.label :tribunal_decision_sub_category %>
+  <%= f.select :tribunal_decision_sub_category, f.object.facet_options(:tribunal_decision_sub_category), { label: "Sub-category" }, { class: "select2 form-control", multiple: true, data: { placeholder: "Select sub-category when relevant" } } %>
+</div>
+<div class="form-group">
+  <%= f.label :tribunal_decision_judges %>
+  <%= f.select :tribunal_decision_judges, f.object.facet_options(:tribunal_decision_judges), { label: "Judges" }, { class: 'select2 form-control', multiple: true, data: { placeholder: 'Select judges' } } %>
+</div>
+<div class="form-group">
+  <%= f.label :tribunal_decision_decision_date %>
+  <%= f.text_field :tribunal_decision_decision_date, label: "Decision date", placeholder: '2015-08-30', class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= f.label :hidden_indexable_content %>
+  <%= f.text_area :hidden_indexable_content, class: 'form-control' %>
+</div>
