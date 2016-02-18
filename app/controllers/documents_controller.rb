@@ -108,6 +108,8 @@ private
       redirect_to document_path(document_type: document_type), status: 404
 
       Airbrake.notify(e)
+
+      false
     end
   end
 
