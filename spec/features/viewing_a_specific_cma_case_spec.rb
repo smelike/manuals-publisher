@@ -92,4 +92,15 @@ RSpec.feature "Viewing a specific case", type: :feature do
     expect(page).to have_content("Energy")
   end
 
+  scenario "that doesn't exist" do
+    content_id = "a-case-that-doesnt-exist"
+    publishing_api_does_not_have_item(content_id)
+
+    visit "/cma-cases/#{content_id}"
+    binding.pry
+
+    expect(page.status_code).to eq(404)
+    expect(page).to have_content("Document not found")
+  end
+
 end
