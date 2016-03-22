@@ -15,4 +15,23 @@ namespace :rummager do
 
     RummagerFinderPublisher.new(metadatas).call
   end
+
+  def document_topics
+    {
+      "cma-cases" => [
+          "competition/competition-act-cartels",
+          "competition/consumer-protection",
+          "competition/markets",
+          "competition/mergers",
+          "competition/regulatory-appeals-references"
+        ],
+      "drug-safety-updates" => [
+          "medicines-medical-devices-blood/vigilance-safety-alerts"
+        ],
+      "medical-safety-alerts" => [
+          "medicines-medical-devices-blood/medical-devices-regulation-safety",
+          "medicines-medical-devices-blood/vigilance-safety-alerts"
+        ],
+    }
+  end
 end
