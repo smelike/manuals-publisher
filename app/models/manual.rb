@@ -22,6 +22,10 @@ class Manual
     @base_path ||= "/guidance/#{title.parameterize}"
   end
 
+  def update_type
+    @update_type ||= "major"
+  end
+
   %w{draft live redrafted}.each do |state|
     define_method("#{state}?") do
       publication_state == state
@@ -186,6 +190,11 @@ class Manual
     else
       false
     end
+  end
+
+  def publish
+    publishing_api.publish(content_id, update_type)
+    self.sections.each(&:publish)
   end
 
 private

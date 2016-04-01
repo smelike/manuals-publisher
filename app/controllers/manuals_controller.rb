@@ -50,6 +50,17 @@ class ManualsController < ApplicationController
     end
   end
 
+  def publish
+    @manual = Manual.find(content_id: params[:content_id])
+    if @manual.publish
+      flash[:success] = "Published #{@manual.title}"
+      redirect_to manual_path(@manual.content_id)
+    else
+      flash[:danger] = "There was an error publishing #{@manual.title}. Please try again later."
+      redirect_to manual_path(@manual.content_id)
+    end
+  end
+
 private
 
   def manual_params

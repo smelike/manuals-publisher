@@ -157,6 +157,10 @@ class Section
     self.attachments.detect { |attachment| attachment.content_id == attachment_content_id }
   end
 
+  def publish
+    publishing_api.publish(content_id, update_type)
+  end
+
 private
 
   def publishing_api
