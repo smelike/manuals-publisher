@@ -193,8 +193,15 @@ class Manual
   end
 
   def publish
-    publishing_api.publish(content_id, update_type)
-    self.sections.each(&:publish)
+    begin
+      publish_request = publishing_api.publish(content_id, update_type)
+      self.sections.each(&:publish)
+
+      publish_request.code == 200
+    rescue GdsApi::HTTPErrorResponse => e
+      Airbrake.notify(e)
+      false
+    end
   end
 
 private

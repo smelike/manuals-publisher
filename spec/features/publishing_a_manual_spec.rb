@@ -51,4 +51,14 @@ RSpec.feature "Publishing a manual", type: :feature do
     expect(page).to have_content("Published A Manual")
     expect(page.status_code).to eq(200)
   end
+
+  scenario "when publishing-api returns non-200 http code on publish" do
+    stub_publishing_api_publish(content_id, {}, status: 504)
+
+    visit "/manuals/#{manual_content_item['content_id']}"
+    expect(page.status_code).to eq(200)
+
+    click_button "Publish"
+    expect(page).to have_content("There was an error publishing #{manual_content_item['title']}. Please try again later.")
+  end
 end
