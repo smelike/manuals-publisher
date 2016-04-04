@@ -23,6 +23,10 @@ class Section
     @base_path ||= "#{manual.base_path}/#{title.parameterize}"
   end
 
+  def update_type
+    @update_type ||= "major"
+  end
+
   %w{draft live redrafted}.each do |state|
     define_method("#{state}?") do
       publication_state == state

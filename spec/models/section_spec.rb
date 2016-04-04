@@ -169,6 +169,7 @@ RSpec.describe Section do
           public_updated_at: test_time.to_datetime.rfc3339,
           publishing_app: "specialist-publisher",
           rendering_app: "manuals-frontend",
+          update_type: "major",
           details: {
             body: "The body of my new section.",
             manual: {

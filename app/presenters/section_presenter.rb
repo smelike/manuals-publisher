@@ -18,7 +18,8 @@ class SectionPresenter
       routes: [{
       path: @section.base_path,
       type: "exact"
-    }]
+    }],
+      update_type: @section.update_type
     }
   end
 
