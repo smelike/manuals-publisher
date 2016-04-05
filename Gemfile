@@ -12,6 +12,7 @@ gem 'jquery-rails', '~> 3.1.4'
 gem 'select2-rails', '~> 4.0.0'
 gem 'sidekiq', '3.2.1'
 gem 'sidekiq-statsd', '0.1.5'
+gem "kaminari"
 
 # GDS managed dependencies
 gem 'plek', '~> 1.10'
